@@ -1,0 +1,32 @@
+%p#notice= notice
+
+%p
+  Number:
+  = @block.block_number
+  
+%p
+  Witness:
+  = @block.witness
+  
+%p
+  Timestamp
+  = @block.timestamp
+  
+- if @block.transactions.any?
+  %table
+    %thead
+      %tr
+        %th Type
+        %th Payload
+    %tbody
+      - @block.transactions.joins(:operations).map(&:operations).each do |transaction|
+        - transaction.each do |operation|
+          %tr
+            %td= operation.steem_type
+            %td
+              %code
+                = operation.payload.to_json
+- else
+  No transactions/operations
+  
+\#{link_to 'Back', blocks_path}

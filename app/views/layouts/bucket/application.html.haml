@@ -1,0 +1,9 @@
+!!!
+%html
+  %head
+    %title Crab Bucket
+    = stylesheet_link_tag    "bucket/application", media: "all"
+    = javascript_include_tag "bucket/application"
+    = csrf_meta_tags
+  %body
+    = yield

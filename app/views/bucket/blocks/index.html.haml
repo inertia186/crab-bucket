@@ -1,0 +1,31 @@
+%p#notice= notice
+%h1 Blocks
+
+%p= will_paginate @blocks
+
+%table.table.table-sm.table-striped
+  %thead
+    %tr
+      %th Block
+      %th Witness
+      %th Timestamp
+      %th Transactions/Operations
+      %th{:colspan => "3"}
+  %tbody
+    - @blocks.each do |block|
+      %tr
+        %td= block.block_number
+        %td= block.witness
+        %td= time_ago_in_words block.timestamp
+        %td
+          = surround '(', ')' do
+            = block.transactions.count
+            \/
+            = block.transactions.map(&:operations).map(&:count).sum
+        %td= link_to 'Show', block
+        %td= link_to 'Destroy', block, method: :delete, data: { confirm: 'Are you sure?' }
+
+%p= will_paginate @blocks
+
+%br/
+= link_to 'New Block', new_block_path
