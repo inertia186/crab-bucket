@@ -26,10 +26,19 @@ namespace :bucket do
     end
   end
   
-  desc "Replay will pick up where the last block (or from a specified block number) left off and save them to the database."
-  task :replay, [:from_block_number] => [:environment] do |t, args|
-    from_block_number = args[:from_block_number].to_i if !!args[:from_block_number]
-    Bucket::Block.replay!(from_block_number) do |block|
+  desc "Replay will pick up where the last block (or from a specified block number or duration) left off and save them to the database."
+  task :replay, [:from] => [:environment] do |t, args|
+    if !!args[:from]
+      from = if args[:from] =~ /\D/
+        f = args[:from]
+        i, m = f.split('.')
+        i = i.to_i
+        i.send(m)
+      else
+        args[:from].to_i
+      end
+    end
+    Bucket::Block.replay!(from) do |block|
       transaction_count = block.transactions.count
       operations_count = block.transactions.map(&:operations).map(&:count).sum
       print "Block: #{block.block_number}"

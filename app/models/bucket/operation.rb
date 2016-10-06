@@ -5,6 +5,7 @@ module Bucket
     # association and specify the model class and foreign key manually.
     belongs_to :block_transaction, foreign_key: 'transaction_id',
       class_name: 'Transaction'
+    delegate :block, to: :block_transaction
     
     scope :pow, -> { where(type: 'Bucket::Operation::Pow') }
     scope :pow2, -> { where(type: 'Bucket::Operation::Pow2') }
@@ -24,6 +25,15 @@ module Bucket
     scope :delete_comment, -> { where(type: 'Bucket::Operation::DeleteComment') }
     scope :witness_update, -> { where(type: 'Bucket::Operation::WitnessUpdate') }
     
+    scope :query, lambda { |query, invert = false|
+      operation = Operation.arel_table
+      query_string = "%#{query}%"
+      
+      where(operation[:payload].matches(query_string)).tap do |r|
+        return invert ? where.not(id: r.select(:id)) : r
+      end
+    }
+
     # Records a operation as ActiveRecord entries.
     def self.record(transaction, operations)
       operations.each do |operation|

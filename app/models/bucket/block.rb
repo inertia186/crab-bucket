@@ -5,6 +5,11 @@ module Bucket
 
     validates_uniqueness_of :block_number
     
+    scope :query, lambda { |query, invert = false|
+      op = Operation.query(query, invert).select(:transaction_id)
+      where(id: Transaction.where(id: op).select(:block_id))
+    }
+    
     # Rebuild will look for any missing blocks.  Could use a lot of memory if
     # there are large gaps.  It is recommended to call #replay! if your database
     # is just behind the head block with no gaps.
@@ -26,9 +31,21 @@ module Bucket
     end
     
     # Replay will pick up where the last block left off.
+    #
+    # If block number is provided as an argument, replay will pick up from that
+    # block number.
+    #
+    # If a duration is provided as an argument, replay will pick up from the
+    # block number estimated to be that long ago.
     # 
-    # @param from_block_number [Fixnum] a block number to start from, optional.
-    def self.replay!(from_block_number = nil, &block)
+    # @param from [Fixnum | ActiveSupport::Duration] a block number or duration to start from, optional.
+    def self.replay!(from = nil, &block)
+      from_block_number = if from.class.ancestors.include? ActiveSupport::Duration
+        estimate_block_number(from)
+      else
+        from
+      end
+      
       latest_block_number = Block.maximum(:block_number).to_i
       current_block_number = from_block_number || latest_block_number + 1
       properties = Bucket.api.get_dynamic_global_properties.result
@@ -82,6 +99,13 @@ module Bucket
       end
       
       _block
+    end
+    
+    def self.estimate_block_number(subtract)
+      properties = Bucket.api.get_dynamic_global_properties.result
+      head_block_number = properties.head_block_number
+      
+      [head_block_number - (subtract.seconds / 3), 0].max
     end
   end
 end
