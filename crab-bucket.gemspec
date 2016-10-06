@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'bootstrap-glyphicons', '~> 0.0.1'
   s.add_dependency 'angular-ui-bootstrap-rails', '~> 1.3.2'
   s.add_dependency 'will_paginate', '~> 3.1.0'
-
+  
   s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'yard', '~> 0.8.7.6'
 end

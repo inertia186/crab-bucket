@@ -1,0 +1,252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Module: Bucket
+  
+    &mdash; Documentation by YARD 0.8.7.6
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '';
+  framesUrl = "frames.html#!Bucket.html";
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (B)</a> &raquo;
+    
+    
+    <span class="title">Bucket</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Module: Bucket
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/bucket/engine.rb<span class="defines">,<br />
+  lib/bucket/version.rb,<br /> app/models/bucket/block.rb,<br /> app/models/bucket/operation.rb,<br /> app/models/bucket/transaction.rb,<br /> app/jobs/bucket/application_job.rb,<br /> app/models/bucket/operation/pow.rb,<br /> app/models/bucket/operation/vote.rb,<br /> app/models/bucket/operation/pow2.rb,<br /> app/models/bucket/operation/custom.rb,<br /> app/models/bucket/operation/comment.rb,<br /> app/models/bucket/operation/convert.rb,<br /> app/models/bucket/application_record.rb,<br /> app/models/bucket/operation/transfer.rb,<br /> app/models/bucket/operation/interest.rb,<br /> app/mailers/bucket/application_mailer.rb,<br /> app/helpers/bucket/application_helper.rb,<br /> app/models/bucket/operation/fill_order.rb,<br /> app/models/bucket/operation/custom_json.rb,<br /> app/controllers/bucket/blocks_controller.rb,<br /> app/models/bucket/operation/feed_publish.rb,<br /> app/models/bucket/operation/author_reward.rb,<br /> app/models/bucket/operation/escrow_release.rb,<br /> app/models/bucket/operation/escrow_dispute.rb,<br /> app/models/bucket/operation/account_create.rb,<br /> app/models/bucket/operation/account_update.rb,<br /> app/models/bucket/operation/delete_comment.rb,<br /> app/models/bucket/operation/comment_option.rb,<br /> app/models/bucket/operation/witness_update.rb,<br /> app/models/bucket/operation/escrow_approve.rb,<br /> app/models/bucket/operation/escrow_transfer.rb,<br /> app/models/bucket/operation/curation_reward.rb,<br /> app/models/bucket/operation/withdraw_vesting.rb,<br /> app/models/bucket/operation/liquidity_reward.rb,<br /> app/controllers/bucket/application_controller.rb,<br /> app/models/bucket/operation/limit_order_create.rb,<br /> app/models/bucket/operation/transfer_to_saving.rb,<br /> app/models/bucket/operation/limit_order_cancel.rb,<br /> app/models/bucket/operation/transfer_to_vesting.rb,<br /> app/models/bucket/operation/transfer_from_saving.rb,<br /> app/models/bucket/operation/fill_convert_request.rb,<br /> app/models/bucket/operation/account_witness_vote.rb,<br /> app/models/bucket/operation/account_witness_proxy.rb,<br /> app/models/bucket/operation/set_withdraw_vesting_route.rb,<br /> app/models/bucket/operation/cancel_transfer_from_saving.rb</span>
+</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Bucket/ApplicationHelper.html" title="Bucket::ApplicationHelper (module)">ApplicationHelper</a></span>
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Bucket/ApplicationController.html" title="Bucket::ApplicationController (class)">ApplicationController</a></span>, <span class='object_link'><a href="Bucket/ApplicationJob.html" title="Bucket::ApplicationJob (class)">ApplicationJob</a></span>, <span class='object_link'><a href="Bucket/ApplicationMailer.html" title="Bucket::ApplicationMailer (class)">ApplicationMailer</a></span>, <span class='object_link'><a href="Bucket/ApplicationRecord.html" title="Bucket::ApplicationRecord (class)">ApplicationRecord</a></span>, <span class='object_link'><a href="Bucket/Block.html" title="Bucket::Block (class)">Block</a></span>, <span class='object_link'><a href="Bucket/BlocksController.html" title="Bucket::BlocksController (class)">BlocksController</a></span>, <span class='object_link'><a href="Bucket/Engine.html" title="Bucket::Engine (class)">Engine</a></span>, <span class='object_link'><a href="Bucket/Operation.html" title="Bucket::Operation (class)">Operation</a></span>, <span class='object_link'><a href="Bucket/Transaction.html" title="Bucket::Transaction (class)">Transaction</a></span>
+    
+  
+</p>
+
+  <h2>Constant Summary</h2>
+  
+    <dl class="constants">
+      
+        <dt id="VERSION-constant" class="">VERSION =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>0.0.4</span><span class='tstring_end'>&#39;</span></span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#api-class_method" title="api (class method)">+ (Object) <strong>api</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stream-class_method" title="stream (class method)">+ (Object) <strong>stream</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="api-class_method">
+  
+    + (<tt>Object</tt>) <strong>api</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+6
+7
+8</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/bucket/application_record.rb', line 6</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_api'>api</span>
+  <span class='ivar'>@api</span> <span class='op'>||=</span> <span class='const'>Radiator</span><span class='op'>::</span><span class='const'>Api</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='const'>CRAB_BUCKET_RADIATOR_OPTIONS</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="stream-class_method">
+  
+    + (<tt>Object</tt>) <strong>stream</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+10
+11
+12</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/bucket/application_record.rb', line 10</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_stream'>stream</span>
+  <span class='ivar'>@stream</span> <span class='op'>||=</span> <span class='const'>Radiator</span><span class='op'>::</span><span class='const'>Stream</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='const'>CRAB_BUCKET_RADIATOR_OPTIONS</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Thu Oct  6 10:29:04 2016 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.7.6 (ruby-2.2.2).
+</div>
+
+  </body>
+</html>
