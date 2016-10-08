@@ -3,8 +3,12 @@ module Bucket
     belongs_to :block
     has_many :operations, dependent: :destroy
     
-    scope :query, lambda { |query, invert = false|
-      where(id: Operation.query(query, invert).select(:transaction_id))
+    scope :query, lambda { |query, options = {}|
+      where(id: Operation.query(query, options).select(:transaction_id))
+    }
+    
+    scope :has_operation_type, lambda { |operation_type, options = {}|
+      where(id: Operation.where(type: operation_type).select(:transaction_id))
     }
     
     # Records transactions as ActiveRecord entries.

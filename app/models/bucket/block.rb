@@ -5,8 +5,26 @@ module Bucket
 
     validates_uniqueness_of :block_number
     
-    scope :query, lambda { |query, invert = false|
-      op = Operation.query(query, invert).select(:transaction_id)
+    scope :ordered, lambda { |options = {}|
+      sort_field = options[:sort_field].presence || :block_number
+      sort_order = options[:sort_order].presence || :asc
+      
+      order(sort_field => sort_order)
+    }
+    
+    scope :witness, lambda { |witness, options = {}|
+      where(witness: witness).tap do |r|
+        return !!options[:invert] ? where.not(id: r.select(:id)) : r
+      end
+    }
+    
+    scope :query, lambda { |query, options = {}|
+      op = Operation.query(query, options).select(:transaction_id)
+      where(id: Transaction.where(id: op).select(:block_id))
+    }
+    
+    scope :has_operation_type, lambda { |operation_type, options = {}|
+      op = Operation.where(type: operation_type).select(:transaction_id)
       where(id: Transaction.where(id: op).select(:block_id))
     }
     

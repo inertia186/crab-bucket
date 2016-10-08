@@ -25,15 +25,15 @@ module Bucket
     scope :delete_comment, -> { where(type: 'Bucket::Operation::DeleteComment') }
     scope :witness_update, -> { where(type: 'Bucket::Operation::WitnessUpdate') }
     
-    scope :query, lambda { |query, invert = false|
+    scope :query, lambda { |query, options = {}|
       operation = Operation.arel_table
       query_string = "%#{query}%"
       
       where(operation[:payload].matches(query_string)).tap do |r|
-        return invert ? where.not(id: r.select(:id)) : r
+        return !!options[:invert] ? where.not(id: r.select(:id)) : r
       end
     }
-
+    
     # Records a operation as ActiveRecord entries.
     def self.record(transaction, operations)
       operations.each do |operation|
