@@ -7,6 +7,13 @@ module Bucket
       class_name: 'Transaction'
     delegate :block, to: :block_transaction
     
+    scope :ordered, lambda { |options = {}|
+      sort_field = options[:sort_field].presence || :transaction_id
+      sort_order = options[:sort_order].presence || :asc
+      
+      order(sort_field => sort_order)
+    }
+
     scope :pow, -> { where(type: 'Bucket::Operation::Pow') }
     scope :pow2, -> { where(type: 'Bucket::Operation::Pow2') }
     scope :vote, -> { where(type: 'Bucket::Operation::Vote') }

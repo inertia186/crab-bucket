@@ -1,0 +1,28 @@
+%p#notice= notice
+%h1
+  First Posts Finder (experimental)
+%h3
+  = pluralize @first_posts.count, 'post'
+
+.pull-xs-right
+  = form_tag first_posts_path, method: :get, class: 'form-inline' do
+    .form-group
+      %span.glyphicon.glyphicon-search
+      = text_field_tag :query, @query, placeholder: 'Quick Query', class: 'form-control form-control-sm'
+      = submit_tag :search
+      &nbsp;
+
+%p= will_paginate @first_posts
+
+%table.table.table-sm.table-striped
+  %thead
+    %tr
+      %th= sortable_header_link_to 'Block', 'block_number'
+      %th= sortable_header_link_to 'Author', 'author'
+  %tbody
+    - @first_posts.each do |first_post|
+      %tr
+        %td= first_post.block.block_number
+        %td= link_to first_post.author, "https://steemit.com/@#{first_post.author}", target: '_new'
+
+%p= will_paginate @first_posts

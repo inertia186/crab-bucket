@@ -8,5 +8,23 @@ module Bucket
         return !!options[:invert] ? where.not(id: r.select(:id)) : r
       end
     }
+    
+    scope :root_posts, -> { query('"parent_author":""') }
+    scope :first_posts, -> {
+      posts = all.root_posts
+      authors = posts.map(&:author)
+      api = Radiator::Api.new
+      accounts = api.lookup_account_names(authors).result
+      accounts = accounts.select do |account|
+        account.post_count < 10
+      end
+      authors = accounts.map(&:name)
+      
+      posts = posts.select do |post|
+        authors.include? post.author
+      end
+      
+      all.where(id: posts.map(&:id))
+    }
   end
 end

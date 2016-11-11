@@ -25,7 +25,9 @@
       %tr
         %td= block.block_number
         %td= block.witness
-        %td= time_ago_in_words block.timestamp
+        %td{uib_tooltip: block.timestamp}
+          = time_ago_in_words block.timestamp
+          ago
         %td
           = surround '(', ')' do
             = block.transactions.count
