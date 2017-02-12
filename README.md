@@ -156,7 +156,7 @@ steps above to enable this plug-in.
 * To run tests with parallelization and local code coverage:
   * `HELL_ENABLED=true rake`
   
-![Temporary Image](https://www.steemimg.com/images/2016/09/19/bucket_of_crabs_cutout-rbe030e040d404730b933ea92b20c6937_x7saw_8byvr_324f4aa5.jpg)
+![Temporary Image](https://img1.steemit.com/0x0/https://www.steemimg.com/images/2016/09/19/bucket_of_crabs_cutout-rbe030e040d404730b933ea92b20c6937_x7saw_8byvr_324f4aa5.jpg)
 
 ## Get in touch!
 
