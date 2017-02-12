@@ -1,4 +1,4 @@
 module Bucket
-  class Operation::ChangeRecoveryaccount < Bucket::Operation
+  class Operation::ChangeRecoveryAccount < Bucket::Operation
   end
 end
