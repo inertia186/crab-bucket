@@ -1,0 +1,655 @@
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "bucket_blocks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "block_number" integer NOT NULL, "previous" varchar NOT NULL, "timestamp" datetime NOT NULL, "transaction_merkle_root" varchar NOT NULL, "witness" varchar NOT NULL, "witness_signature" varchar NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mselect sqlite_version(*)[0m
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_bucket_blocks_on_block_number" ON "bucket_blocks" ("block_number")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "bucket_operations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "type" varchar NOT NULL, "transaction_id" integer NOT NULL, "payload" varchar NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX "index_bucket_operations_on_transaction_id" ON "bucket_operations" ("transaction_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_bucket_operations_on_transaction_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_bucket_operations_on_transaction_id' AND type='index'
+[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX "index_bucket_operations_on_type" ON "bucket_operations" ("type")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "bucket_transactions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "block_id" integer NOT NULL, "ref_block_num" integer NOT NULL, "ref_block_prefix" integer(8) NOT NULL, "expiration" datetime NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX "index_bucket_transactions_on_block_id" ON "bucket_transactions" ("block_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES ('20160918211209')[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "test"], ["created_at", 2017-02-12 16:46:18 UTC], ["updated_at", 2017-02-12 16:46:18 UTC]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.9ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-02-12 16:46:18.310986', '2017-02-12 16:46:18.310986', 980190962)[0m
+  [1m[35m (1.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-02-12 16:46:18.835402', '2017-02-12 16:46:18.835402', 980190962)[0m
+  [1m[35m (0.5ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-02-12 16:46:18.839183', '2017-02-12 16:46:18.839183', 980190962)[0m
+  [1m[35m (0.5ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-02-12 16:46:18.842667', '2017-02-12 16:46:18.842667', 980190962)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-02-12 16:46:18.845520', '2017-02-12 16:46:18.845520', 980190962)[0m
+  [1m[35m (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-02-12 16:46:18.849143', '2017-02-12 16:46:18.849143', 980190962)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-02-12 16:46:18.852759', '2017-02-12 16:46:18.852759', 980190962)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-02-12 16:46:18.856218', '2017-02-12 16:46:18.856218', 980190962)[0m
+  [1m[35m (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.4ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-02-12 16:46:43.043239', '2017-02-12 16:46:43.043239', 980190962)[0m
+  [1m[35m (0.7ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.8ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-02-12 16:46:43.056270', '2017-02-12 16:46:43.056270', 980190962)[0m
+  [1m[35m (4.5ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-02-12 16:46:43.548577', '2017-02-12 16:46:43.548577', 980190962)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-02-12 16:46:43.551802', '2017-02-12 16:46:43.551802', 980190962)[0m
+  [1m[35m (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-02-12 16:46:43.554959', '2017-02-12 16:46:43.554959', 980190962)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (1.3ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-02-12 16:46:43.558649', '2017-02-12 16:46:43.558649', 980190962)[0m
+  [1m[35m (1.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-02-12 16:46:43.566259', '2017-02-12 16:46:43.566259', 980190962)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-02-12 16:46:43.569800', '2017-02-12 16:46:43.569800', 980190962)[0m
+  [1m[35m (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (1.1ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:24:59.678315', '2017-04-30 05:24:59.678315', 980190962)[0m
+  [1m[35m (0.8ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:24:59.689813', '2017-04-30 05:24:59.689813', 980190962)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:25:00.104954', '2017-04-30 05:25:00.104954', 980190962)[0m
+  [1m[35m (0.6ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:25:00.109574', '2017-04-30 05:25:00.109574', 980190962)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:25:00.113534', '2017-04-30 05:25:00.113534', 980190962)[0m
+  [1m[35m (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:25:00.117010', '2017-04-30 05:25:00.117010', 980190962)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:25:00.122653', '2017-04-30 05:25:00.122653', 980190962)[0m
+  [1m[35m (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:25:00.126092', '2017-04-30 05:25:00.126092', 980190962)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.9ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:30:46.918548', '2017-04-30 05:30:46.918548', 980190962)[0m
+  [1m[35m (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:30:47.275815', '2017-04-30 05:30:47.275815', 980190962)[0m
+  [1m[35m (0.5ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:30:47.280038', '2017-04-30 05:30:47.280038', 980190962)[0m
+  [1m[35m (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:30:47.283721', '2017-04-30 05:30:47.283721', 980190962)[0m
+  [1m[35m (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:30:47.286474', '2017-04-30 05:30:47.286474', 980190962)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:30:47.294681', '2017-04-30 05:30:47.294681', 980190962)[0m
+  [1m[35m (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:30:47.298049', '2017-04-30 05:30:47.298049', 980190962)[0m
+  [1m[35m (0.5ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:30:47.302586', '2017-04-30 05:30:47.302586', 980190962)[0m
+  [1m[35m (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (1.7ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (1.4ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:31:37.840334', '2017-04-30 05:31:37.840334', 980190962)[0m
+  [1m[35m (2.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:31:37.858449', '2017-04-30 05:31:37.858449', 980190962)[0m
+  [1m[35m (0.5ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:31:38.266474', '2017-04-30 05:31:38.266474', 980190962)[0m
+  [1m[35m (0.5ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:31:38.271787', '2017-04-30 05:31:38.271787', 980190962)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:31:38.275715', '2017-04-30 05:31:38.275715', 980190962)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:31:38.279500', '2017-04-30 05:31:38.279500', 980190962)[0m
+  [1m[35m (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:31:38.284864', '2017-04-30 05:31:38.284864', 980190962)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:31:38.288412', '2017-04-30 05:31:38.288412', 980190962)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to InitialCrabBucketMigration (20160918211209)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "bucket_blocks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "block_number" integer NOT NULL, "previous" varchar NOT NULL, "timestamp" datetime NOT NULL, "transaction_merkle_root" varchar NOT NULL, "witness" varchar NOT NULL, "witness_signature" varchar NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mselect sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_bucket_blocks_on_block_number" ON "bucket_blocks" ("block_number")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "bucket_transactions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "block_id" integer NOT NULL, "ref_block_num" integer NOT NULL, "ref_block_prefix" integer(8) NOT NULL, "expiration" datetime NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_bucket_transactions_on_block_id" ON "bucket_transactions" ("block_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "bucket_operations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "type" varchar NOT NULL, "transaction_id" integer NOT NULL, "payload" varchar NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_bucket_operations_on_transaction_id" ON "bucket_operations" ("transaction_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_bucket_operations_on_transaction_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_bucket_operations_on_transaction_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_bucket_operations_on_type" ON "bucket_operations" ("type")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160918211209"]]
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "test"], ["created_at", 2017-04-30 05:39:05 UTC], ["updated_at", 2017-04-30 05:39:05 UTC]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_bucket_blocks_on_block_number' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_bucket_blocks_on_block_number' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_bucket_operations_on_type' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_bucket_operations_on_type' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_bucket_operations_on_transaction_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_bucket_operations_on_transaction_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_bucket_transactions_on_block_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_bucket_transactions_on_block_id' AND type='index'
+[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.4ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:39:11.884291', '2017-04-30 05:39:11.884291', 980190962)[0m
+  [1m[35m (0.9ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (10.0ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:39:11.899552', '2017-04-30 05:39:11.899552', 980190962)[0m
+  [1m[35m (1.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:39:12.320085', '2017-04-30 05:39:12.320085', 980190962)[0m
+  [1m[35m (0.5ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (1.1ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:39:12.325093', '2017-04-30 05:39:12.325093', 980190962)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:39:12.329826', '2017-04-30 05:39:12.329826', 980190962)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:39:12.333132', '2017-04-30 05:39:12.333132', 980190962)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:39:12.338522', '2017-04-30 05:39:12.338522', 980190962)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:39:12.341597', '2017-04-30 05:39:12.341597', 980190962)[0m
+  [1m[35m (0.7ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.4ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (10.9ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.7ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:40:08.912477', '2017-04-30 05:40:08.912477', 980190962)[0m
+  [1m[35m (0.9ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:40:09.340211', '2017-04-30 05:40:09.340211', 980190962)[0m
+  [1m[35m (0.5ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.4ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:40:09.344958', '2017-04-30 05:40:09.344958', 980190962)[0m
+  [1m[35m (0.7ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:40:09.349372', '2017-04-30 05:40:09.349372', 980190962)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:40:09.353486', '2017-04-30 05:40:09.353486', 980190962)[0m
+  [1m[35m (0.7ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:40:09.359330', '2017-04-30 05:40:09.359330', 980190962)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 05:40:09.362583', '2017-04-30 05:40:09.362583', 980190962)[0m
+  [1m[35m (0.6ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (2.0ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (3.8ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 17:00:30.358572', '2017-04-30 17:00:30.358572', 980190962)[0m
+  [1m[35m (0.6ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (9.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 17:00:30.376556', '2017-04-30 17:00:30.376556', 980190962)[0m
+  [1m[35m (0.7ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 17:00:30.413845', '2017-04-30 17:00:30.413845', 980190962)[0m
+  [1m[35m (5.5ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.4ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 17:00:30.439153', '2017-04-30 17:00:30.439153', 980190962)[0m
+  [1m[35m (0.9ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (11.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (1.1ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.7ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 17:00:30.495254', '2017-04-30 17:00:30.495254', 980190962)[0m
+  [1m[35m (1.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (2.9ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 17:00:30.515567', '2017-04-30 17:00:30.515567', 980190962)[0m
+  [1m[35m (2.2ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("created_at", "updated_at", "id") VALUES ('2017-04-30 17:00:30.525392', '2017-04-30 17:00:30.525392', 980190962)[0m
+  [1m[35m (0.8ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.4ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("block_number", "created_at", "updated_at", "id") VALUES (1, '2017-04-30 17:02:46.042466', '2017-04-30 17:02:46.042466', 980190962)[0m
+  [1m[35m (0.5ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("block_number", "created_at", "updated_at", "id") VALUES (1, '2017-04-30 17:02:46.505610', '2017-04-30 17:02:46.505610', 980190962)[0m
+  [1m[35m (0.5ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("block_number", "created_at", "updated_at", "id") VALUES (1, '2017-04-30 17:02:46.509689', '2017-04-30 17:02:46.509689', 980190962)[0m
+  [1m[35m (0.9ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("block_number", "created_at", "updated_at", "id") VALUES (1, '2017-04-30 17:02:46.514873', '2017-04-30 17:02:46.514873', 980190962)[0m
+  [1m[35m (1.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (2.5ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("block_number", "created_at", "updated_at", "id") VALUES (1, '2017-04-30 17:02:46.520718', '2017-04-30 17:02:46.520718', 980190962)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.7ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("block_number", "created_at", "updated_at", "id") VALUES (1, '2017-04-30 17:02:46.529406', '2017-04-30 17:02:46.529406', 980190962)[0m
+  [1m[35m (0.9ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (1.0ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.8ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("block_number", "created_at", "updated_at", "id") VALUES (1, '2017-04-30 17:02:46.537659', '2017-04-30 17:02:46.537659', 980190962)[0m
+  [1m[35m (1.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (5.4ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (15.3ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("block_number", "previous", "created_at", "updated_at", "id") VALUES (1, '0', '2017-04-30 17:03:19.814004', '2017-04-30 17:03:19.814004', 980190962)[0m
+  [1m[35m (6.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("block_number", "previous", "created_at", "updated_at", "id") VALUES (1, '0', '2017-04-30 17:03:20.273225', '2017-04-30 17:03:20.273225', 980190962)[0m
+  [1m[35m (0.5ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("block_number", "previous", "created_at", "updated_at", "id") VALUES (1, '0', '2017-04-30 17:03:20.277832', '2017-04-30 17:03:20.277832', 980190962)[0m
+  [1m[35m (0.6ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("block_number", "previous", "created_at", "updated_at", "id") VALUES (1, '0', '2017-04-30 17:03:20.283835', '2017-04-30 17:03:20.283835', 980190962)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("block_number", "previous", "created_at", "updated_at", "id") VALUES (1, '0', '2017-04-30 17:03:20.288753', '2017-04-30 17:03:20.288753', 980190962)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("block_number", "previous", "created_at", "updated_at", "id") VALUES (1, '0', '2017-04-30 17:03:20.291970', '2017-04-30 17:03:20.291970', 980190962)[0m
+  [1m[35m (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("block_number", "previous", "created_at", "updated_at", "id") VALUES (1, '0', '2017-04-30 17:03:20.295238', '2017-04-30 17:03:20.295238', 980190962)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.5ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.8ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("block_number", "previous", "timestamp", "created_at", "updated_at", "id") VALUES (1, '0', '2017-04-30 17:03:56', '2017-04-30 17:03:56.041629', '2017-04-30 17:03:56.041629', 980190962)[0m
+  [1m[35m (1.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("block_number", "previous", "timestamp", "created_at", "updated_at", "id") VALUES (1, '0', '2017-04-30 17:03:56', '2017-04-30 17:03:56.055018', '2017-04-30 17:03:56.055018', 980190962)[0m
+  [1m[35m (0.7ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("block_number", "previous", "timestamp", "created_at", "updated_at", "id") VALUES (1, '0', '2017-04-30 17:03:56', '2017-04-30 17:03:56.065244', '2017-04-30 17:03:56.065244', 980190962)[0m
+  [1m[35m (0.5ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("block_number", "previous", "timestamp", "created_at", "updated_at", "id") VALUES (1, '0', '2017-04-30 17:03:56', '2017-04-30 17:03:56.070195', '2017-04-30 17:03:56.070195', 980190962)[0m
+  [1m[35m (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("block_number", "previous", "timestamp", "created_at", "updated_at", "id") VALUES (1, '0', '2017-04-30 17:03:56', '2017-04-30 17:03:56.073389', '2017-04-30 17:03:56.073389', 980190962)[0m
+  [1m[35m (0.5ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.8ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (1.0ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.8ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("block_number", "previous", "timestamp", "created_at", "updated_at", "id") VALUES (1, '0', '2017-04-30 17:03:56', '2017-04-30 17:03:56.083310', '2017-04-30 17:03:56.083310', 980190962)[0m
+  [1m[35m (1.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.4ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.8ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("block_number", "previous", "timestamp", "created_at", "updated_at", "id") VALUES (1, '0', '2017-04-30 17:03:56', '2017-04-30 17:03:56.104920', '2017-04-30 17:03:56.104920', 980190962)[0m
+  [1m[35m (1.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.5ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("block_number", "previous", "timestamp", "witness", "transaction_merkle_root", "witness_signature", "created_at", "updated_at", "id") VALUES (1, '0', '2016-03-24 16:05:00', 'initminer', '0', '204f8ad56a8f5cf722a02b035a61b500aa59b9519b2c33c77a80c0a714680a5a5a7a340d909d19996613c5e4ae92146b9add8a7a663eef37d837ef881477313043', '2017-04-30 17:05:58.900025', '2017-04-30 17:05:58.900025', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("block_number", "previous", "timestamp", "witness", "transaction_merkle_root", "witness_signature", "created_at", "updated_at", "id") VALUES (2, '0000000109833ce528d5bbfb3f6225b39ee10086', '2016-03-24 16:05:36', 'initminer', '0', '1f3e85ab301a600f391f11e859240f090a9404f8ebf0bf98df58eb17f455156e2d16e1dcfc621acb3a7acbedc86b6d2560fdd87ce5709e80fa333a2bbb92966df3', '2017-04-30 17:05:58.900025', '2017-04-30 17:05:58.900025', 298486374)[0m
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+-------------------------------------------------
+Bucket::BlocksControllerTest: test_should_get_new
+-------------------------------------------------
+  [1m[36mBucket::Block Load (0.3ms)[0m  [1m[34mSELECT  "bucket_blocks".* FROM "bucket_blocks" WHERE "bucket_blocks"."id" = ? LIMIT ?[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/bucket/blocks/new" for 127.0.0.1 at 2017-04-30 10:05:59 -0700
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+----------------------------------------------------
+Bucket::BlocksControllerTest: test_should_show_block
+----------------------------------------------------
+  [1m[36mBucket::Block Load (0.1ms)[0m  [1m[34mSELECT  "bucket_blocks".* FROM "bucket_blocks" WHERE "bucket_blocks"."id" = ? LIMIT ?[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/bucket/blocks/980190962" for 127.0.0.1 at 2017-04-30 10:05:59 -0700
+Processing by Bucket::BlocksController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mBucket::Block Load (0.1ms)[0m  [1m[34mSELECT  "bucket_blocks".* FROM "bucket_blocks" WHERE "bucket_blocks"."id" = ? LIMIT ?[0m  [["id", 980190962], ["LIMIT", 1]]
+Completed 406 Not Acceptable in 159ms (ActiveRecord: 0.1ms)
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+------------------------------------------------------
+Bucket::BlocksControllerTest: test_should_create_block
+------------------------------------------------------
+  [1m[36mBucket::Block Load (0.1ms)[0m  [1m[34mSELECT  "bucket_blocks".* FROM "bucket_blocks" WHERE "bucket_blocks"."id" = ? LIMIT ?[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "bucket_blocks"[0m
+Started POST "/bucket/blocks" for 127.0.0.1 at 2017-04-30 10:05:59 -0700
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+------------------------------------------------------
+Bucket::BlocksControllerTest: test_should_update_block
+------------------------------------------------------
+  [1m[36mBucket::Block Load (0.1ms)[0m  [1m[34mSELECT  "bucket_blocks".* FROM "bucket_blocks" WHERE "bucket_blocks"."id" = ? LIMIT ?[0m  [["id", 980190962], ["LIMIT", 1]]
+Started PATCH "/bucket/blocks/980190962" for 127.0.0.1 at 2017-04-30 10:05:59 -0700
+  [1m[35m (0.9ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+---------------------------------------------------
+Bucket::BlocksControllerTest: test_should_get_index
+---------------------------------------------------
+  [1m[36mBucket::Block Load (0.1ms)[0m  [1m[34mSELECT  "bucket_blocks".* FROM "bucket_blocks" WHERE "bucket_blocks"."id" = ? LIMIT ?[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/bucket/blocks" for 127.0.0.1 at 2017-04-30 10:05:59 -0700
+Processing by Bucket::BlocksController#index as HTML
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+-------------------------------------------------------
+Bucket::BlocksControllerTest: test_should_destroy_block
+-------------------------------------------------------
+  [1m[36mBucket::Block Load (0.1ms)[0m  [1m[34mSELECT  "bucket_blocks".* FROM "bucket_blocks" WHERE "bucket_blocks"."id" = ? LIMIT ?[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "bucket_blocks"[0m
+Started DELETE "/bucket/blocks/980190962" for 127.0.0.1 at 2017-04-30 10:05:59 -0700
+Processing by Bucket::BlocksController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mBucket::Block Load (0.1ms)[0m  [1m[34mSELECT  "bucket_blocks".* FROM "bucket_blocks" WHERE "bucket_blocks"."id" = ? LIMIT ?[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mBucket::Transaction Load (0.4ms)[0m  [1m[34mSELECT "bucket_transactions".* FROM "bucket_transactions" WHERE "bucket_transactions"."block_id" = ?[0m  [["block_id", 980190962]]
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM "bucket_blocks" WHERE "bucket_blocks"."id" = ?[0m  [["id", 980190962]]
+  [1m[35m (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/bucket/blocks
+Completed 302 Found in 69ms (ActiveRecord: 1.5ms)
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "bucket_blocks"[0m
+  [1m[35m (1.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+------------------------
+Bucket::Test: test_truth
+------------------------
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.7ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("block_number", "previous", "timestamp", "witness", "transaction_merkle_root", "witness_signature", "created_at", "updated_at", "id") VALUES (1, '0', '2016-03-24 16:05:00', 'initminer', '0', '204f8ad56a8f5cf722a02b035a61b500aa59b9519b2c33c77a80c0a714680a5a5a7a340d909d19996613c5e4ae92146b9add8a7a663eef37d837ef881477313043', '2017-04-30 17:06:34.004859', '2017-04-30 17:06:34.004859', 980190962)[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("block_number", "previous", "timestamp", "witness", "transaction_merkle_root", "witness_signature", "created_at", "updated_at", "id") VALUES (2, '0000000109833ce528d5bbfb3f6225b39ee10086', '2016-03-24 16:05:36', 'initminer', '0', '1f3e85ab301a600f391f11e859240f090a9404f8ebf0bf98df58eb17f455156e2d16e1dcfc621acb3a7acbedc86b6d2560fdd87ce5709e80fa333a2bbb92966df3', '2017-04-30 17:06:34.004859', '2017-04-30 17:06:34.004859', 298486374)[0m
+  [1m[35m (2.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+------------------------------------------------------
+Bucket::BlocksControllerTest: test_should_create_block
+------------------------------------------------------
+  [1m[36mBucket::Block Load (0.2ms)[0m  [1m[34mSELECT  "bucket_blocks".* FROM "bucket_blocks" WHERE "bucket_blocks"."id" = ? LIMIT ?[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "bucket_blocks"[0m
+Started POST "/bucket/blocks" for 127.0.0.1 at 2017-04-30 10:06:34 -0700
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+---------------------------------------------------
+Bucket::BlocksControllerTest: test_should_get_index
+---------------------------------------------------
+  [1m[36mBucket::Block Load (0.1ms)[0m  [1m[34mSELECT  "bucket_blocks".* FROM "bucket_blocks" WHERE "bucket_blocks"."id" = ? LIMIT ?[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/bucket/blocks" for 127.0.0.1 at 2017-04-30 10:06:34 -0700
+Processing by Bucket::BlocksController#index as HTML
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.2ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+----------------------------------------------------
+Bucket::BlocksControllerTest: test_should_show_block
+----------------------------------------------------
+  [1m[36mBucket::Block Load (0.1ms)[0m  [1m[34mSELECT  "bucket_blocks".* FROM "bucket_blocks" WHERE "bucket_blocks"."id" = ? LIMIT ?[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/bucket/blocks/980190962" for 127.0.0.1 at 2017-04-30 10:06:34 -0700
+Processing by Bucket::BlocksController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mBucket::Block Load (0.1ms)[0m  [1m[34mSELECT  "bucket_blocks".* FROM "bucket_blocks" WHERE "bucket_blocks"."id" = ? LIMIT ?[0m  [["id", 980190962], ["LIMIT", 1]]
+Completed 406 Not Acceptable in 129ms (ActiveRecord: 0.1ms)
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+------------------------------------------------------
+Bucket::BlocksControllerTest: test_should_update_block
+------------------------------------------------------
+  [1m[36mBucket::Block Load (0.1ms)[0m  [1m[34mSELECT  "bucket_blocks".* FROM "bucket_blocks" WHERE "bucket_blocks"."id" = ? LIMIT ?[0m  [["id", 980190962], ["LIMIT", 1]]
+Started PATCH "/bucket/blocks/980190962" for 127.0.0.1 at 2017-04-30 10:06:34 -0700
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------------------------
+Bucket::BlocksControllerTest: test_should_get_edit
+--------------------------------------------------
+  [1m[36mBucket::Block Load (0.1ms)[0m  [1m[34mSELECT  "bucket_blocks".* FROM "bucket_blocks" WHERE "bucket_blocks"."id" = ? LIMIT ?[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/bucket/blocks/980190962/edit" for 127.0.0.1 at 2017-04-30 10:06:34 -0700
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+-------------------------------------------------
+Bucket::BlocksControllerTest: test_should_get_new
+-------------------------------------------------
+  [1m[36mBucket::Block Load (0.1ms)[0m  [1m[34mSELECT  "bucket_blocks".* FROM "bucket_blocks" WHERE "bucket_blocks"."id" = ? LIMIT ?[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/bucket/blocks/new" for 127.0.0.1 at 2017-04-30 10:06:34 -0700
+  [1m[35m (0.2ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+-------------------------------------------------------
+Bucket::BlocksControllerTest: test_should_destroy_block
+-------------------------------------------------------
+  [1m[36mBucket::Block Load (0.3ms)[0m  [1m[34mSELECT  "bucket_blocks".* FROM "bucket_blocks" WHERE "bucket_blocks"."id" = ? LIMIT ?[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "bucket_blocks"[0m
+Started DELETE "/bucket/blocks/980190962" for 127.0.0.1 at 2017-04-30 10:06:34 -0700
+Processing by Bucket::BlocksController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mBucket::Block Load (0.1ms)[0m  [1m[34mSELECT  "bucket_blocks".* FROM "bucket_blocks" WHERE "bucket_blocks"."id" = ? LIMIT ?[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mBucket::Transaction Load (0.2ms)[0m  [1m[34mSELECT "bucket_transactions".* FROM "bucket_transactions" WHERE "bucket_transactions"."block_id" = ?[0m  [["block_id", 980190962]]
+  [1m[35mSQL (1.8ms)[0m  [1m[31mDELETE FROM "bucket_blocks" WHERE "bucket_blocks"."id" = ?[0m  [["id", 980190962]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/bucket/blocks
+Completed 302 Found in 49ms (ActiveRecord: 2.5ms)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "bucket_blocks"[0m
+  [1m[35m (0.9ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.7ms)[0m  [1m[31mDELETE FROM "bucket_blocks"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("block_number", "previous", "timestamp", "witness", "transaction_merkle_root", "witness_signature", "created_at", "updated_at", "id") VALUES (1, '0', '2016-03-24 16:05:00', 'initminer', '0', '204f8ad56a8f5cf722a02b035a61b500aa59b9519b2c33c77a80c0a714680a5a5a7a340d909d19996613c5e4ae92146b9add8a7a663eef37d837ef881477313043', '2017-04-30 17:08:08.700642', '2017-04-30 17:08:08.700642', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "bucket_blocks" ("block_number", "previous", "timestamp", "witness", "transaction_merkle_root", "witness_signature", "created_at", "updated_at", "id") VALUES (2, '0000000109833ce528d5bbfb3f6225b39ee10086', '2016-03-24 16:05:36', 'initminer', '0', '1f3e85ab301a600f391f11e859240f090a9404f8ebf0bf98df58eb17f455156e2d16e1dcfc621acb3a7acbedc86b6d2560fdd87ce5709e80fa333a2bbb92966df3', '2017-04-30 17:08:08.700642', '2017-04-30 17:08:08.700642', 298486374)[0m
+  [1m[35m (1.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+------------------------
+Bucket::Test: test_truth
+------------------------
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+----------------------------------------------------
+Bucket::BlocksControllerTest: test_should_show_block
+----------------------------------------------------
+  [1m[36mBucket::Block Load (0.2ms)[0m  [1m[34mSELECT  "bucket_blocks".* FROM "bucket_blocks" WHERE "bucket_blocks"."id" = ? LIMIT ?[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/bucket/blocks/980190962" for 127.0.0.1 at 2017-04-30 10:08:09 -0700
+Processing by Bucket::BlocksController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mBucket::Block Load (0.1ms)[0m  [1m[34mSELECT  "bucket_blocks".* FROM "bucket_blocks" WHERE "bucket_blocks"."id" = ? LIMIT ?[0m  [["id", 980190962], ["LIMIT", 1]]
+Completed 406 Not Acceptable in 105ms (ActiveRecord: 0.1ms)
+  [1m[35m (0.2ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+-------------------------------------------------
+Bucket::BlocksControllerTest: test_should_get_new
+-------------------------------------------------
+  [1m[36mBucket::Block Load (0.1ms)[0m  [1m[34mSELECT  "bucket_blocks".* FROM "bucket_blocks" WHERE "bucket_blocks"."id" = ? LIMIT ?[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/bucket/blocks/new" for 127.0.0.1 at 2017-04-30 10:08:09 -0700
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+---------------------------------------------------
+Bucket::BlocksControllerTest: test_should_get_index
+---------------------------------------------------
+  [1m[36mBucket::Block Load (0.3ms)[0m  [1m[34mSELECT  "bucket_blocks".* FROM "bucket_blocks" WHERE "bucket_blocks"."id" = ? LIMIT ?[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/bucket/blocks" for 127.0.0.1 at 2017-04-30 10:08:09 -0700
+Processing by Bucket::BlocksController#index as HTML
+Completed 406 Not Acceptable in 176ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+------------------------------------------------------
+Bucket::BlocksControllerTest: test_should_create_block
+------------------------------------------------------
+  [1m[36mBucket::Block Load (0.1ms)[0m  [1m[34mSELECT  "bucket_blocks".* FROM "bucket_blocks" WHERE "bucket_blocks"."id" = ? LIMIT ?[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "bucket_blocks"[0m
+Started POST "/bucket/blocks" for 127.0.0.1 at 2017-04-30 10:08:09 -0700
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+-------------------------------------------------------
+Bucket::BlocksControllerTest: test_should_destroy_block
+-------------------------------------------------------
+  [1m[36mBucket::Block Load (0.1ms)[0m  [1m[34mSELECT  "bucket_blocks".* FROM "bucket_blocks" WHERE "bucket_blocks"."id" = ? LIMIT ?[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "bucket_blocks"[0m
+Started DELETE "/bucket/blocks/980190962" for 127.0.0.1 at 2017-04-30 10:08:09 -0700
+Processing by Bucket::BlocksController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mBucket::Block Load (1.1ms)[0m  [1m[34mSELECT  "bucket_blocks".* FROM "bucket_blocks" WHERE "bucket_blocks"."id" = ? LIMIT ?[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mBucket::Transaction Load (0.1ms)[0m  [1m[34mSELECT "bucket_transactions".* FROM "bucket_transactions" WHERE "bucket_transactions"."block_id" = ?[0m  [["block_id", 980190962]]
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "bucket_blocks" WHERE "bucket_blocks"."id" = ?[0m  [["id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/bucket/blocks
+Completed 302 Found in 60ms (ActiveRecord: 2.0ms)
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "bucket_blocks"[0m
+  [1m[35m (0.5ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------------------------
+Bucket::BlocksControllerTest: test_should_get_edit
+--------------------------------------------------
+  [1m[36mBucket::Block Load (0.2ms)[0m  [1m[34mSELECT  "bucket_blocks".* FROM "bucket_blocks" WHERE "bucket_blocks"."id" = ? LIMIT ?[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/bucket/blocks/980190962/edit" for 127.0.0.1 at 2017-04-30 10:08:09 -0700
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+------------------------------------------------------
+Bucket::BlocksControllerTest: test_should_update_block
+------------------------------------------------------
+  [1m[36mBucket::Block Load (0.1ms)[0m  [1m[34mSELECT  "bucket_blocks".* FROM "bucket_blocks" WHERE "bucket_blocks"."id" = ? LIMIT ?[0m  [["id", 980190962], ["LIMIT", 1]]
+Started PATCH "/bucket/blocks/980190962" for 127.0.0.1 at 2017-04-30 10:08:09 -0700
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m

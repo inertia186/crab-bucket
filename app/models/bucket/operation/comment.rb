@@ -26,5 +26,9 @@ module Bucket
       
       all.where(id: posts.map(&:id))
     }
+    
+    def metadata
+      JSON[payload.json_metadata] rescue {}
+    end
   end
 end

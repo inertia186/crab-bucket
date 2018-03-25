@@ -2,9 +2,10 @@ module Bucket
   class Block < ApplicationRecord
     has_many :transactions, dependent: :destroy
     has_many :operations, through: :transactions
+    has_many :virtual_operations, conditions: { 'transaction_id = NULL' }
 
-    validates_uniqueness_of :block_number
-    
+    validates :block_number, numericality: true, presence: true, uniqueness: true
+  
     scope :ordered, lambda { |options = {}|
       sort_field = options[:sort_field].presence || :block_number
       sort_order = options[:sort_order].presence || :asc
@@ -84,7 +85,10 @@ module Bucket
     # 
     def self.stream_head!(&block)
       Bucket.stream.block_numbers do |number|
-        _block = Block.record(Bucket.api.find_block(number), number)
+        raw_block = Bucket.api.find_block(number)
+        redo if raw_block.nil?
+        
+        _block = Block.record(raw_block, number)
         
         if !!block
           yield _block
@@ -113,6 +117,7 @@ module Bucket
         _block = Block.create(params)
         if _block.persisted?
           _block.transactions.record(_block, block.transactions)
+          _block.virtual_operations.record(_block, block.virtaul_operations)
         end
       end
       

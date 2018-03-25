@@ -1,7 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'radiator', '~> 0.0.4', github: 'inertia186/radiator'
-
 # Declare your gem's dependencies in bucket.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
 # development dependencies will be added by default to the :development group.
